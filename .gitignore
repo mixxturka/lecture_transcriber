@@ -6,4 +6,5 @@ src/__pycache__/
 *.mp3
 *.wav
 *.srt
+*.txt
 models_cache/
