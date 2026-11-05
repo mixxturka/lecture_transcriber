@@ -102,28 +102,6 @@ def ask_video_choice(video_path: Path) -> Path:
             print("\nОстановка программы")
             sys.exit(130)
 
-#TODO Добавить проверку на верное название, используя регулярки
-def ask_file_name() -> str:
-    """Asks for user's lecture's file name
-
-
-    """
-    print("Напишите название видео (расширение не писать): ")
-    while True:
-        _file_name = input()
-        print(f"Название файла: {_file_name}")
-        confirm = input("Вы уверены, что название верное? (это важно) (Y/n): ")
-        confirm = confirm.strip()
-        if (confirm in _CONFIRM_LETTERS):
-            return _file_name
-        elif (confirm in _DENY_LETTERS):
-            print("Хорошо, повторите ввод...")
-            continue
-        else:
-            print("Введите только y или n")
-            #sys.exit(1)  #! Код ошибки другой!!!
-
-
 if __name__ == "__main__":
     _model_name = ask_model()
     print("Model name: ", _model_name)
