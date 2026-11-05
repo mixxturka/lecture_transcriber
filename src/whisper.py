@@ -6,10 +6,7 @@ import user_input
 import timestp
 
 from faster_whisper import WhisperModel
-from faster_whisper.utils import download_model
 from pathlib import Path
-
-file_name = user_input.ask_file_name()
 
 script_dir = Path(__file__).parent
 project_root = script_dir.parent
@@ -17,9 +14,11 @@ project_root = script_dir.parent
 video_path = project_root / "videos"
 txt_path = project_root / "text"
 
-video_file = video_path / f"{file_name}.mp4"
+video_file = user_input.ask_video_choice(video_path)
+
+file_name = video_file.stem  # Получаем имя файла без расширения
 output_txt_file = txt_path / f"{file_name}.txt"
-output_srt_file = video_path / f"{file_name}.srt"
+output_srt_file = video_path / f"{file_name}.srt" # .srt сохраняем в папку с видео
 
 if not os.path.exists(video_file):
     print(f"Ошибка: Файл '{video_file}' не найден в текущей папке!")
@@ -27,13 +26,10 @@ if not os.path.exists(video_file):
     sys.exit(1)
 
 model_name = user_input.ask_model()
-
-model_path = download_model(model_name)
-
 print(
     "Загрузка модели Whisper... Это может занять некоторое время при первом запуске."
 )
-model = WhisperModel(model_path, device="cpu", compute_type="int8")
+model = WhisperModel(model_name, device="cpu", compute_type="int8")
 
 print(f"Начинаю расшифровку файла: {video_file}")
 start_time = time.time()
