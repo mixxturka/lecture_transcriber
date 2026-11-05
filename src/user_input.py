@@ -21,7 +21,7 @@ def _choice_parser(raw: str, options: tuple[str, ...]) -> str:
     index = int(raw) - 1
     if not 0 <= index <= len(options) - 1:
         raise ValueError(
-            f"Номер должен быть в диапазоне от 0 до {len(options) - 1} вкл")
+            f"Номер должен быть в диапазоне от 0 до {len(options)} вкл")
 
     return options[index]
 
@@ -79,7 +79,6 @@ def ask_video_choice(video_path: Path) -> Path:
         print(f"{num}. {video.name} ({size_mb:.1f} MB)")
     
     print("=" * 60)
-    print("Введите номер видео или '0' для ручного ввода имени")
     
     while True:
         try:
@@ -91,7 +90,10 @@ def ask_video_choice(video_path: Path) -> Path:
                 print(f"\nВыбрано: {selected.name}")
                 return selected
             else:
-                print(f"Номер должен быть от 1 до {len(videos)} или 0")
+                if len(videos) == 1:
+                    print("У вас доступен только 1 номер")
+                else:
+                    print(f"Номер должен быть от 1 до {len(videos)}")
                 
         except ValueError:
             print("Введите число")
