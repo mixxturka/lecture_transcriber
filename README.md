@@ -4,6 +4,8 @@
 <img src="misc/untitled(1).png" width="600">
 
 ![systemd_meme](misc/systemd%20shit.gif)
+              ^
+Смашная гифка |
 
 # lecture_transcriber
 
